@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --app --no-eslint --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(ls /usr/local/bin/ 2>/dev/null | grep -E \"node|npm|bun|pnpm\" ; ls /opt/homebrew/bin/ 2>/dev/null | grep -E \"node|npm|bun|pnpm\" ; ls /usr/bin/ | grep -E \"node|npm|bun\")",
+      "Bash(find /opt /usr/local /Users/joanarosado -name \"node\" -type f 2>/dev/null | head -5)",
+      "Bash(curl -fsSL https://fnm.vercel.app/install)",
+      "Bash(bash)"
+    ]
+  }
+}
