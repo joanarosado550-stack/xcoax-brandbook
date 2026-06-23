@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "brandbook",
+      "runtimeExecutable": "/Users/joanarosado/.nvm/versions/node/v20.20.2/bin/node",
+      "runtimeArgs": ["/Users/joanarosado/Desktop/my_brandbook/node_modules/.bin/next", "dev"],
+      "port": 3000,
+      "env": {
+        "PATH": "/tmp:/Users/joanarosado/bin:/Users/joanarosado/.nvm/versions/node/v20.20.2/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  ]
+}

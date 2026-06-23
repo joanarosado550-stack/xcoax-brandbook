@@ -5,7 +5,31 @@
       "Bash(ls /usr/local/bin/ 2>/dev/null | grep -E \"node|npm|bun|pnpm\" ; ls /opt/homebrew/bin/ 2>/dev/null | grep -E \"node|npm|bun|pnpm\" ; ls /usr/bin/ | grep -E \"node|npm|bun\")",
       "Bash(find /opt /usr/local /Users/joanarosado -name \"node\" -type f 2>/dev/null | head -5)",
       "Bash(curl -fsSL https://fnm.vercel.app/install)",
-      "Bash(bash)"
+      "Bash(bash)",
+      "Bash(xargs kill -9)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm --version)",
+      "Bash(sudo ln -sf /Users/joanarosado/.nvm/versions/node/v20.20.2/bin/node /usr/local/bin/node)",
+      "Bash(mkdir -p /usr/local/bin)",
+      "Bash(ln -sf /Users/joanarosado/.nvm/versions/node/v20.20.2/bin/node /usr/local/bin/node)",
+      "Bash(mkdir -p ~/bin)",
+      "Bash(ln -sf /Users/joanarosado/.nvm/versions/node/v20.20.2/bin/node ~/bin/node)",
+      "Bash(ls /usr/bin/node 2>/dev/null || echo \"not there\" *)",
+      "Bash(ln -sf /Users/joanarosado/.nvm/versions/node/v20.20.2/bin/node /tmp/node)",
+      "Bash(find /Users/joanarosado -name \"COMPUTATION_X*\" -o -name \"COMMUNICATION_X*\" -o -name \"AESTHETICS_X*\" 2>/dev/null | grep -v \".Trash\")",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/joanarosado/Desktop/my_brandbook/public/totemockup.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/joanarosado/Desktop/my_brandbook/public/credentialsmockup.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight \"/Users/joanarosado/Desktop/my_brandbook/public/credentialsmockup.png\")",
+      "Bash(ffmpeg -i /Users/joanarosado/Desktop/my_brandbook/public/conferenciamock_1.mov -vcodec libx264 -crf 28 -preset fast -acodec aac -b:a 128k -movflags +faststart /Users/joanarosado/Desktop/my_brandbook/public/conferenciamock_1.mp4)",
+      "Bash(brew install *)",
+      "Read(//usr/bin/**)",
+      "Bash(python3 -c \"import subprocess; print\\(subprocess.run\\(['which','python3'],capture_output=True,text=True\\).stdout\\)\")",
+      "Bash(avconvert --help)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git push *)"
     ]
   }
 }

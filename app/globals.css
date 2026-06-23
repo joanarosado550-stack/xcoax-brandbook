@@ -1,26 +1,136 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f0ede8;
+  --foreground: #0a0a0a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-mono), "DM Mono", ui-monospace, monospace;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Hide default cursor on all interactive elements too */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* ── Mobile: restore native cursor, disable custom cursor system ── */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
+
+  /* Section titles: reduce size so they don't collide with body text */
+  .brand-title {
+    font-size: clamp(2.5rem, 10vw, 3.75rem) !important;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Concept X blocks: stack image above text, center both */
+  .x-block {
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    min-height: auto !important;
+  }
+  .x-block > div:first-child,
+  .x-block > div:last-child {
+    width: 100% !important;
+    flex: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding: 0 1.5rem !important;
+    justify-content: center;
+  }
+  /* Image container: limit height on mobile */
+  .x-block .x-img {
+    max-height: 40vh;
+  }
+  /* Always show image before text regardless of DOM order */
+  .x-block .x-img-wrap { order: 1; }
+  .x-block .x-text     { order: 2; }
+
+  /* Text block: center-align content on mobile */
+  .x-block .x-text {
+    text-align: center;
+    align-items: center;
+  }
+  .x-block .x-text > div {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Body text rows: stack divider above text, let text use full width */
+  .body-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .body-row > p,
+  .body-row > div > p {
+    max-width: 100% !important;
+  }
+
+  /* Three Pillars summary: remove column dividers and padding when stacked */
+  .x-summary-item {
+    border-right: none !important;
+    border-left: none !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* X blocks: fill exactly one viewport height so the next block doesn't bleed in */
+  .brand-scroll section.snap-block {
+    height: var(--snap-h, 100vh) !important;
+    min-height: var(--snap-h, 100vh) !important;
+    max-height: var(--snap-h, 100vh) !important;
+    overflow: hidden !important;
+  }
+
+  /* All sections: snap to start but grow to fit content — no fixed-height clipping */
+  .brand-scroll section {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: unset !important;
+  }
+}
+
+::selection {
+  background: #0a0a0a;
+  color: #f0ede8;
+}
+
+/* ── Snap scrolling: each section = one full page ── */
+/* .brand-scroll is the overflow-y scroll container in SectionView.        */
+/* --snap-h is set via JS to the container's clientHeight (exact fit).     */
+/* Specificity 0-1-1 beats Tailwind utilities (0-1-0) for height props.    */
+.brand-scroll section {
+  height: var(--snap-h, 100vh);
+  min-height: var(--snap-h, 100vh);
+  max-height: var(--snap-h, 100vh);
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  box-sizing: border-box;
 }
