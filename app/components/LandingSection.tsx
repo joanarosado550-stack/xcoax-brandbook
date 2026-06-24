@@ -43,7 +43,7 @@ function AsciiBand({
   count: number;
   color: string;
   delay: number;
-  pos: Record<string, string>;
+  pos: { top?: string; bottom?: string; left?: string; right?: string };
 }) {
   const [shown,  setShown]  = useState(0);
   const [active, setActive] = useState(false);
