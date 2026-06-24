@@ -140,7 +140,7 @@ export default function LandingSection() {
         style={{ width: 280, height: "min(52vh, 364px)" }}
       >
         <Image
-          src="/LOGOBRANCO.png"
+          src="/LOGObranco.png"
           alt="xCoAx 2027"
           fill
           className="object-contain"

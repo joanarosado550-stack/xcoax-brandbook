@@ -103,7 +103,7 @@ function SectionHeader({
       {/* Left: logo + section info */}
       <div className="flex items-center gap-5">
         <Image
-          src="/LOGOBRANCO.png"
+          src="/LOGObranco.png"
           alt="xCoAx"
           width={28}
           height={36}

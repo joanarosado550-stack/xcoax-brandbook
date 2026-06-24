@@ -23,7 +23,7 @@ export default function NavBar({ open, onClose }: { open: SectionId | null; onCl
         aria-label="xCoAx 2027"
       >
         <Image
-          src="/LOGOBRANCO.png"
+          src="/LOGObranco.png"
           alt="xCoAx 2027"
           width={60}
           height={78}
