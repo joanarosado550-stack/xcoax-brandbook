@@ -300,7 +300,7 @@ export default function PhotoContent() {
                 />
               </div>
               <video
-                src="/Comp 1_1.mov"
+                src="/bracelet.mp4"
                 autoPlay
                 loop
                 muted
