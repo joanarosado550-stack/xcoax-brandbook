@@ -135,39 +135,39 @@ function BlendSlider() {
   const commOpacity  = val;
 
   return (
-    <div className="mt-10 pt-8" style={{ borderTop: LINE }}>
-      <p className="text-[9px] tracking-[0.28em] uppercase text-center mb-7" style={{ color: "rgba(0,0,0,0.28)" }}>
+    <div className="flex flex-col items-center w-full">
+      <p className="text-[9px] tracking-[0.28em] uppercase mb-10" style={{ color: "rgba(0,0,0,0.28)" }}>
         Computation&thinsp;+&thinsp;Communication&thinsp;=&thinsp;Aesthetics
       </p>
 
-      {/* Stacked image overlay */}
-      <div className="flex justify-center mb-7">
-        <div className="relative" style={{ width: 110, height: 110 }}>
-          <Image src="/COMPUTATION_X.png"  alt="Computation X"  fill className="object-contain"
-            style={{ opacity: compOpacity, mixBlendMode: "multiply", transition: "opacity 0.04s linear" }} />
-          <Image src="/COMMUNICATION_X.png" alt="Communication X" fill className="object-contain"
-            style={{ opacity: commOpacity, mixBlendMode: "multiply", transition: "opacity 0.04s linear" }} />
-          <Image src="/AESTHETICS_X.png"   alt="Aesthetics X"   fill className="object-contain"
-            style={{ opacity: aestheticsVisible ? 0.85 : 0, mixBlendMode: "multiply", transition: "opacity 0.45s ease" }} />
-        </div>
+      {/* Stacked image overlay — large */}
+      <div className="relative mb-10" style={{ width: "min(460px, 62vw)", height: "min(460px, 62vw)" }}>
+        <Image src="/COMPUTATION_X.png"  alt="Computation X"  fill className="object-contain"
+          style={{ opacity: compOpacity, mixBlendMode: "multiply", transition: "opacity 0.04s linear" }} />
+        <Image src="/COMMUNICATION_X.png" alt="Communication X" fill className="object-contain"
+          style={{ opacity: commOpacity, mixBlendMode: "multiply", transition: "opacity 0.04s linear" }} />
+        <Image src="/AESTHETICS_X.png"   alt="Aesthetics X"   fill className="object-contain"
+          style={{ opacity: aestheticsVisible ? 0.85 : 0, mixBlendMode: "multiply", transition: "opacity 0.45s ease" }} />
       </div>
 
       {/* Slider */}
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-[8px] tracking-[0.18em] uppercase" style={{ color: val < 0.5 ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.25)", transition: "color 0.3s" }}>
-          Computation X
-        </span>
-        <span className="text-[8px] tracking-[0.18em] uppercase" style={{ color: val > 0.5 ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.25)", transition: "color 0.3s" }}>
-          Communication X
-        </span>
+      <div className="w-full" style={{ maxWidth: "min(460px, 62vw)" }}>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: val < 0.5 ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.22)", transition: "color 0.3s" }}>
+            Computation X
+          </span>
+          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: val > 0.5 ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.22)", transition: "color 0.3s" }}>
+            Communication X
+          </span>
+        </div>
+        <input
+          type="range"
+          min={0} max={1} step={0.01}
+          value={val}
+          onChange={(e) => setVal(parseFloat(e.target.value))}
+          className="blend-slider w-full"
+        />
       </div>
-      <input
-        type="range"
-        min={0} max={1} step={0.01}
-        value={val}
-        onChange={(e) => setVal(parseFloat(e.target.value))}
-        className="blend-slider w-full"
-      />
     </div>
   );
 }
@@ -293,58 +293,28 @@ export default function ColorsContent() {
         })}
 
         {/* ════ BLOCK 5 — Summary ════ */}
-        <section className="min-h-screen flex flex-col justify-center px-14 py-16">
+        <section className="min-h-screen flex flex-col justify-between px-14 py-16">
 
           <Reveal y={18}>
-            <div className="flex items-end justify-between mb-12 pb-5" style={{ borderBottom: LINE }}>
+            <div className="flex items-end justify-between pb-5" style={{ borderBottom: LINE }}>
               <span className="text-[10px] tracking-[0.32em] uppercase" style={{ color: "rgba(0,0,0,0.28)" }}>
                 xCoAx_2027&thinsp;/&thinsp;Concept&thinsp;/&thinsp;Summary
               </span>
               <span className="text-[10px] tracking-[0.28em]" style={{ color: "rgba(0,0,0,0.18)" }}>
-                Three pillars
+                The Aesthetics X
               </span>
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-3 mobile:grid-cols-1 mobile:gap-8">
-            {X_DATA.map((x, i) => (
-              <Reveal key={x.id} delay={i * 0.1} y={22}>
-                <div
-                  className="flex flex-col x-summary-item"
-                  style={{
-                    borderRight: i < 2 ? LINE : "none",
-                    paddingRight: i < 2 ? "2.5rem" : 0,
-                    paddingLeft:  i > 0 ? "2.5rem" : 0,
-                  }}
-                >
-                  <div className="flex items-center justify-center py-10">
-                    <Image
-                      src={x.image}
-                      alt={x.name}
-                      width={300}
-                      height={260}
-                      className="object-contain w-full h-auto"
-                      style={{ mixBlendMode: "multiply", maxHeight: "26vh" }}
-                    />
-                  </div>
-                  <div className="pt-5" style={{ borderTop: LINE }}>
-                    <p className="text-[10px] tracking-[0.3em] uppercase mb-1" style={{ color: "rgba(0,0,0,0.28)" }}>
-                      {x.index}
-                    </p>
-                    <p className="text-[13px] font-medium tracking-[0.1em] uppercase">{x.name}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.25} y={14}>
-            <BlendSlider />
+          <Reveal delay={0.15} y={20}>
+            <div className="flex justify-center">
+              <BlendSlider />
+            </div>
           </Reveal>
 
-          <Reveal delay={0.35} y={10}>
+          <Reveal delay={0.25} y={10}>
             <div
-              className="mt-10 flex items-center justify-between text-[10px] tracking-[0.28em] uppercase"
+              className="flex items-center justify-between text-[10px] tracking-[0.28em] uppercase"
               style={{ color: "rgba(0,0,0,0.18)", borderTop: LINE, paddingTop: "1.25rem" }}
             >
               <span>xCoAx 2027&thinsp;—&thinsp;Brand Book</span>
