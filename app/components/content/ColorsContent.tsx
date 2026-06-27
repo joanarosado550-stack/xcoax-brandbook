@@ -87,6 +87,7 @@ const X_DATA = [
     imageLeft: true,
     description:
       "Built from characters rooted in code and mathematical logic, the Computation X reflects precision, structure and systematic thinking. Every character is placed with intention, forming a mark that feels grid-strict and algorithmically ordered.",
+    characters: "0 + = 1 - >",
     legend: [
       { label: "DENSITY",   value: "High" },
       { label: "STRUCTURE", value: "Grid-strict" },
@@ -101,6 +102,7 @@ const X_DATA = [
     imageLeft: false,
     description:
       "Constructed from symbols drawn from written language and human expression, the Communication X represents the exchange of meaning between people. Its character choices feel familiar and readable, suggesting dialogue, notation and the flow of information.",
+    characters: "@ * : #",
     legend: [
       { label: "DENSITY",   value: "Medium" },
       { label: "STRUCTURE", value: "Slightly irregular" },
@@ -115,6 +117,7 @@ const X_DATA = [
     imageLeft: true,
     description:
       "The Aesthetics X emerges from the overlay of the Computation and Communication X's, combining both character sets into a single, more complex mark. It is not designed but generated — the result of two systems converging — embodying the conference's central idea that aesthetics arises at the intersection of logic and language.",
+    characters: "0 + = 1 - > @ * : #",
     legend: [
       { label: "DENSITY",   value: "Variable" },
       { label: "STRUCTURE", value: "Generated overlay" },
@@ -226,6 +229,14 @@ export default function ColorsContent() {
                 <p className="text-[11px] leading-[2.05] tracking-[0.03em]" style={{ color: "rgba(0,0,0,0.45)" }}>
                   {x.description}
                 </p>
+                <div className="mt-4">
+                  <p className="text-[9px] tracking-[0.22em] uppercase mb-1.5" style={{ color: "rgba(0,0,0,0.28)", fontWeight: 300 }}>
+                    Characters
+                  </p>
+                  <p className="text-[13px] tracking-[0.28em]" style={{ color: "rgba(0,0,0,0.55)", fontWeight: 300 }}>
+                    {x.characters}
+                  </p>
+                </div>
                 <div className="mt-4 flex flex-col gap-1">
                   {x.legend.map((row) => (
                     <p key={row.label} className="text-[9px] tracking-[0.22em] uppercase" style={{ color: "rgba(0,0,0,0.28)", fontWeight: 300 }}>
