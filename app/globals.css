@@ -28,6 +28,44 @@ body {
   cursor: none !important;
 }
 
+/* ── Blend slider — minimal custom range input ── */
+.blend-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+  outline: none;
+  border-radius: 0;
+  cursor: pointer !important;
+}
+.blend-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3645ff;
+  cursor: pointer !important;
+  border: none;
+}
+.blend-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3645ff;
+  cursor: pointer !important;
+  border: none;
+}
+.blend-slider::-webkit-slider-runnable-track {
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+}
+.blend-slider::-moz-range-track {
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+}
+
 /* ── Mobile: restore native cursor, disable custom cursor system ── */
 @media (max-width: 768px) {
   body {

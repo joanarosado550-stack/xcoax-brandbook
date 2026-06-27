@@ -113,6 +113,65 @@ const X_DATA = [
 
 const LINE = "1px solid rgba(0,0,0,0.08)";
 
+// ─── Blend slider ──────────────────────────────────────────────────────
+function BlendSlider() {
+  const [val, setVal] = useState(0);
+  const [aestheticsVisible, setAestheticsVisible] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const atMid = val >= 0.44 && val <= 0.56;
+
+  useEffect(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (atMid) {
+      timerRef.current = setTimeout(() => setAestheticsVisible(true), 250);
+    } else {
+      setAestheticsVisible(false);
+    }
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [atMid]);
+
+  const compOpacity  = 1 - val;
+  const commOpacity  = val;
+
+  return (
+    <div className="mt-10 pt-8" style={{ borderTop: LINE }}>
+      <p className="text-[9px] tracking-[0.28em] uppercase text-center mb-7" style={{ color: "rgba(0,0,0,0.28)" }}>
+        Computation&thinsp;+&thinsp;Communication&thinsp;=&thinsp;Aesthetics
+      </p>
+
+      {/* Stacked image overlay */}
+      <div className="flex justify-center mb-7">
+        <div className="relative" style={{ width: 110, height: 110 }}>
+          <Image src="/COMPUTATION_X.png"  alt="Computation X"  fill className="object-contain"
+            style={{ opacity: compOpacity, mixBlendMode: "multiply", transition: "opacity 0.04s linear" }} />
+          <Image src="/COMMUNICATION_X.png" alt="Communication X" fill className="object-contain"
+            style={{ opacity: commOpacity, mixBlendMode: "multiply", transition: "opacity 0.04s linear" }} />
+          <Image src="/AESTHETICS_X.png"   alt="Aesthetics X"   fill className="object-contain"
+            style={{ opacity: aestheticsVisible ? 0.85 : 0, mixBlendMode: "multiply", transition: "opacity 0.45s ease" }} />
+        </div>
+      </div>
+
+      {/* Slider */}
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[8px] tracking-[0.18em] uppercase" style={{ color: val < 0.5 ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.25)", transition: "color 0.3s" }}>
+          Computation X
+        </span>
+        <span className="text-[8px] tracking-[0.18em] uppercase" style={{ color: val > 0.5 ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.25)", transition: "color 0.3s" }}>
+          Communication X
+        </span>
+      </div>
+      <input
+        type="range"
+        min={0} max={1} step={0.01}
+        value={val}
+        onChange={(e) => setVal(parseFloat(e.target.value))}
+        className="blend-slider w-full"
+      />
+    </div>
+  );
+}
+
 // ─── Main component ────────────────────────────────────────────────────
 export default function ColorsContent() {
   const [contentReady, setContentReady] = useState(false);
@@ -279,9 +338,13 @@ export default function ColorsContent() {
             ))}
           </div>
 
+          <Reveal delay={0.25} y={14}>
+            <BlendSlider />
+          </Reveal>
+
           <Reveal delay={0.35} y={10}>
             <div
-              className="mt-16 flex items-center justify-between text-[10px] tracking-[0.28em] uppercase"
+              className="mt-10 flex items-center justify-between text-[10px] tracking-[0.28em] uppercase"
               style={{ color: "rgba(0,0,0,0.18)", borderTop: LINE, paddingTop: "1.25rem" }}
             >
               <span>xCoAx 2027&thinsp;—&thinsp;Brand Book</span>
