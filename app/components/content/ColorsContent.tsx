@@ -113,26 +113,54 @@ const X_DATA = [
 
 const LINE = "1px solid rgba(0,0,0,0.08)";
 
+const PALETTE_COLORS = ["#3645ff", "#ff48b9", "#ef66ff", "#25f4a5", "#caf938"];
+
 // ─── Blend slider ──────────────────────────────────────────────────────
 function BlendSlider() {
   const [val, setVal] = useState(0);
   const [aestheticsVisible, setAestheticsVisible] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const [colorIdx, setColorIdx] = useState(0);
+  const midTimerRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const colorIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Midpoint Aesthetics X reveal
   const atMid = val >= 0.44 && val <= 0.56;
-
   useEffect(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (midTimerRef.current) clearTimeout(midTimerRef.current);
     if (atMid) {
-      timerRef.current = setTimeout(() => setAestheticsVisible(true), 250);
+      midTimerRef.current = setTimeout(() => setAestheticsVisible(true), 250);
     } else {
       setAestheticsVisible(false);
     }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+    return () => { if (midTimerRef.current) clearTimeout(midTimerRef.current); };
   }, [atMid]);
 
-  const compOpacity  = 1 - val;
-  const commOpacity  = val;
+  // Color cycling — runs only when idle
+  useEffect(() => {
+    if (dragging) {
+      if (colorIntervalRef.current) clearInterval(colorIntervalRef.current);
+      return;
+    }
+    colorIntervalRef.current = setInterval(() => {
+      setColorIdx((i) => (i + 1) % PALETTE_COLORS.length);
+    }, 800);
+    return () => { if (colorIntervalRef.current) clearInterval(colorIntervalRef.current); };
+  }, [dragging]);
+
+  const handleDragStart = () => {
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    setDragging(true);
+  };
+
+  const handleDragEnd = () => {
+    resumeTimerRef.current = setTimeout(() => setDragging(false), 1000);
+  };
+
+  const handleColor = PALETTE_COLORS[colorIdx];
+  const compOpacity = 1 - val;
+  const commOpacity = val;
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -165,7 +193,12 @@ function BlendSlider() {
           min={0} max={1} step={0.01}
           value={val}
           onChange={(e) => setVal(parseFloat(e.target.value))}
+          onMouseDown={handleDragStart}
+          onTouchStart={handleDragStart}
+          onMouseUp={handleDragEnd}
+          onTouchEnd={handleDragEnd}
           className="blend-slider w-full"
+          style={{ "--handle-color": handleColor } as React.CSSProperties}
         />
       </div>
     </div>

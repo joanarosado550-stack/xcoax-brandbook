@@ -45,17 +45,19 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #3645ff;
+  background: var(--handle-color, #3645ff);
   cursor: pointer !important;
   border: none;
+  transition: background 0.7s ease;
 }
 .blend-slider::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #3645ff;
+  background: var(--handle-color, #3645ff);
   cursor: pointer !important;
   border: none;
+  transition: background 0.7s ease;
 }
 .blend-slider::-webkit-slider-runnable-track {
   height: 1px;
